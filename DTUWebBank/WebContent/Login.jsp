@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>WEBBANK</title>
-<link rel="stylesheet" type="text/css" href="myStyle.css">
+<link rel="stylesheet" type="text/css" href="styles/myStyle.css">
 </head>
 <body>
 
 <div id="header">
-<img src="CrownBankLogo2.png" alt="Logo" width="600" height="140">
+<img src="pictures/CrownBankLogo2.png" alt="Logo" width="800" height="140">
 </div>
 
 <div id="nav">
@@ -18,9 +18,10 @@
 <a href="CreateAccount.jsp" target="_self">Create Account</a> <br><br>
 <a href="Home.jsp" target="_self">Home</a> <br><br>
 <center>
-<img src="Logo.png" alt="Logo" width="140" height="140">
+<img src="pictures/Logo.png" alt="Logo" width="140" height="140">
 </center>
 </div>
+
 <!--  The section source code is copied from http://www.cssflow.com/snippets/login-form/demo/html  -->
 <div id="section">
       <h1>Login</h1>

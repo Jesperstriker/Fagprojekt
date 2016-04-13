@@ -28,8 +28,6 @@ Welcome!
 </h1>
 <p> Hello and welcome to our online banking application!<br>
 
-<iframe src="demo_iframe.htm" width="800" height="500"></iframe>
-
 </div>
 
 <div id="footer">
