@@ -8,8 +8,8 @@ public class Controller {
 	private String url = "jdbc:db2://myhost:5021/mydb";
 	private Connection con;
 
-	private void transaction(int sender, 
-			int recipient, double amount, String Valuta) throws SQLException {
+	private void transaction(int sender,int recipient, double amount) 
+			throws SQLException {
 		Statement stmt;
 		String sql;
 		ResultSet rs;

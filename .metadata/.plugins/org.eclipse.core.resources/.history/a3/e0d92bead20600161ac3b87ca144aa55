@@ -1,0 +1,18 @@
+package dataObjects;
+
+public class TestBankAccount {
+	/*
+	 * Author: Michael
+	 * Test name: testBankAccount
+	 * Test description:
+	 * 		Tests that the system can properly manipulate the data objects
+	 * Test steps:
+	 * 		1.
+	 */
+	
+	@Test
+	public void testBankAccount() {
+		
+	}
+	
+}

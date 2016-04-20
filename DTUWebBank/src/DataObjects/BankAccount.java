@@ -3,10 +3,10 @@ public class BankAccount {
 	private double balance;
 	private String currency;
 	private String[] history;
-	private int accNumber;
+	private long accNumber;
 	
 	
-	public BankAccount(double balance, String currency, String[] history, int accNumber){
+	public BankAccount(double balance, String currency, String[] history, long accNumber){
 		this.setBalance(balance);
 		this.setCurrency(currency);
 		this.setHistory(history);
@@ -14,13 +14,13 @@ public class BankAccount {
 	}
 
 
-	public int getAccNumber() {
+	public long getAccNumber() {
 		return accNumber;
 	}
 
 
-	public void setAccNumber(int accNumber) {
-		this.accNumber = accNumber;
+	public void setAccNumber(long accNumber2) {
+		this.accNumber = accNumber2;
 	}
 
 

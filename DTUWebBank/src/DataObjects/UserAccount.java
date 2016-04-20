@@ -3,14 +3,14 @@ package dataObjects;
 public class UserAccount {
 	private String username;
 	private String ownerName;
-	private BankAccount[] bankAccount;
+	private BankAccount[] bankAccounts;
 	private String type;
 	private String password;
 	
-	public UserAccount(String username, String ownerName, BankAccount[] bankAccount, String type, String password){
+	public UserAccount(String username, String ownerName, BankAccount[] bankAccounts, String type, String password){
 		this.setUsername(username);
 		this.setOwnerName(ownerName);
-		this.setBankAccount(bankAccount);
+		this.setBankAccounts(bankAccounts);
 		this.setType(type);
 		this.setPassword(password);
 	}
@@ -31,12 +31,12 @@ public class UserAccount {
 		this.ownerName = ownerName;
 	}
 
-	public BankAccount[] getBankAccount() {
-		return bankAccount;
+	public BankAccount[] getBankAccounts() {
+		return bankAccounts;
 	}
 
-	public void setBankAccount(BankAccount[] bankAccount) {
-		this.bankAccount = bankAccount;
+	public void setBankAccounts(BankAccount[] bankAccounts) {
+		this.bankAccounts = bankAccounts;
 	}
 
 	public String getType() {

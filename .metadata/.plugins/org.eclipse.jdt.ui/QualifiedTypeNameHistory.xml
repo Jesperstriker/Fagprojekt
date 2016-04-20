@@ -3,4 +3,5 @@
 <fullyQualifiedTypeName name="API_tests.sampleDataSetup"/>
 <fullyQualifiedTypeName name="API.UserAccount"/>
 <fullyQualifiedTypeName name="API.Controller"/>
+<fullyQualifiedTypeName name="api.Controller"/>
 </qualifiedTypeNameHistroy>

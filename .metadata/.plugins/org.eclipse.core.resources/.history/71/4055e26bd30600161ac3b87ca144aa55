@@ -1,0 +1,29 @@
+package dataObjects;
+
+import java.math.BigInteger;
+
+public class TestBankAccount {
+	/*
+	 * Author: Michael
+	 * Test name: testBankAccount
+	 * Test description:
+	 * 		Tests that the system can properly manipulate the data objects
+	 * Test steps:
+	 * 		1.
+	 */
+	
+	@Test
+	public void testBankAccount() {
+		
+		//Constructor for BankAccount:
+		// BankAccount(double balance, String currency, String[] history, int accNumber)
+		double balance = 100.00;
+		String currency = "USD";
+		String history = "";
+		long accountNumber = 9999999999;
+		
+		
+		BankAccount bankAcc = new BankAccount();
+	}
+	
+}
