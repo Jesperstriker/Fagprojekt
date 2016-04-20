@@ -1,4 +1,4 @@
-package DataObjects;
+package dataObjects;
 
 public class UserAccount {
 	private String username;

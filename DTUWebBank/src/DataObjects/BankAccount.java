@@ -1,4 +1,4 @@
-package DataObjects;
+package dataObjects;
 public class BankAccount {
 	private double balance;
 	private String currency;

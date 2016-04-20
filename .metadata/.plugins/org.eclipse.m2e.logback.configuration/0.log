@@ -1,0 +1,9 @@
+2016-04-13 10:11:07,153 [Worker-21] INFO  org.eclipse.jetty.util.log - Logging initialized @608750ms
+2016-04-13 10:11:07,235 [Worker-21] INFO  org.eclipse.jetty.server.Server - jetty-9.2.13.v20150730
+2016-04-13 10:11:07,342 [Worker-21] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@145de150{HTTP/1.1}{0.0.0.0:50091}
+2016-04-13 10:11:07,343 [Worker-21] INFO  org.eclipse.jetty.server.Server - Started @608951ms
+2016-04-13 10:12:00,176 [Worker-24] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
+2016-04-13 14:07:08,394 [Worker-14] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
+2016-04-18 09:16:12,814 [Worker-11] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
+2016-04-18 09:16:58,493 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
+2016-04-20 09:24:12,852 [Worker-14] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.

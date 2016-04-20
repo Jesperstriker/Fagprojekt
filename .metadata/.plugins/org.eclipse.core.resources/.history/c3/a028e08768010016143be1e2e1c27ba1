@@ -1,0 +1,135 @@
+package API_tests;
+
+/*
+ * assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+ */
+
+
+import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.Test;
+
+import API.Controller;
+import API.UserAccount;
+import API_tests.sampleDataSetup;
+
+
+public class testController extends sampleDataSetup{
+	
+	@Test
+	public void testCreateUser() throws Exception {
+		Controller cont = new Controller();
+		
+		//Creating values for a new user account:
+		String pw = "adminPW";
+		String username = "Admin";
+		String ownerName = "Michael";
+		String type = "admin";
+		
+		//Testing that the user does not already exist:
+		assertFalse(cont.userExists(username));
+		
+		//asking the controller to create the user and add to the DB
+		UserAccount user = cont.CreateUserAccount(username,ownerName,type,pw);
+		
+		//Testing if the newly added user exists:
+		assertTrue(cont.UserExists(username));
+		
+		
+		//Checking that the user object is looking as expected:
+		assertEquals(user.getPW,pw);
+		assertEquals(user.getUsername,username);
+		assertEquals(user.getOwnerName,ownerName);
+		assertEquals(user.getType,type);
+		assertEquals(user.getBankAccounts.size,0);
+	}
+
+	/*
+	 * Author: Michael
+	 * Test name: testLogin
+	 * Test description:
+	 * 		Tests that a user can log in using the controller
+	 * Test steps:
+	 * 		1. Generates a user
+	 * 		2. Tests that no one is logged in
+	 * 		3. Loggin in
+	 * 		4. Tests that the login was a success
+	 * 		5. Logs out
+	 * 		6. Tests that no one is logged in
+	 */
+	
+	@Test
+	public void testLogin() {
+		Controller cont = new Controller();
+		// Step 1: Generating a user
+		String pw = "adminPW";
+		String username = "Admin";
+		String ownerName = "Michael";
+		String type = "admin";
+		UserAccount user = cont.CreateUserAccount(username,ownerName,type,pw);
+		
+		// Step 2: Tests that no one is logged in
+		assertFalse(cont.isLoggedin);
+		
+		// Step 3: Logging in
+		boolean isLoggedin = cont.Login(username,pw);
+		
+		//Step 4: Tests that the login was a success
+		assertTrue(isLoggedin);
+		assertTrue(cont.isLoggedin);
+		
+		// Step 5: Logs out
+		cont.Logout();
+		
+		// Step 6: Tests that no one is logged in
+		assertFalse(cont.isLoggedin);
+	}
+	
+	/*
+	 * Author: Michael
+	 * Test name: testLoginCredentialsException
+	 * Test description:
+	 * 		Tests that the correct exceptions are thrown when logging in using bad credentials
+	 * Test steps:
+	 * 		1. Generates a user
+	 * 		2. Tests that no one is logged in
+	 * 		3. Loggin in with bad credentials (wrong password)
+	 * 		4. Tests that the login was a fail and 
+	 * 		   that the correct exception is thrown
+	 * 		5. Loggin in with bad credentials (wrong username)
+	 * 		6. Tests that the login was a fail and 
+	 * 		   that the correct exception is thrown
+	 */
+	
+	@Test
+	public void testLoginCredentialsException() throws Exception{
+		Controller cont = new Controller();
+		// Step 1: Generating a user
+		String pw = "adminPW";
+		String username = "Admin";
+		String ownerName = "Michael";
+		String type = "admin";
+		UserAccount user = cont.CreateUserAccount(username,ownerName,type,pw);
+		
+		// Step 2: Tests that no one is logged in
+		assertFalse(cont.isLoggedin);
+		
+		// Step 3: Logging in
+		boolean isLoggedin = cont.Login(username,pw);
+		
+		//Step 4: Tests that the login was a success
+		assertTrue(isLoggedin);
+		assertTrue(cont.isLoggedin);
+		
+		// Step 5: Logs out
+		cont.Logout();
+		
+		// Step 6: Tests that no one is logged in
+		assertFalse(cont.isLoggedin);
+	}
+
+}

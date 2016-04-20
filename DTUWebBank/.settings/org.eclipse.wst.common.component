@@ -2,6 +2,7 @@
     <wb-module deploy-name="DTUWebBank">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
         <property name="java-output-path" value="/DTUWebBank/build/classes"/>
         <property name="context-root" value="DTUWebBank"/>
     </wb-module>

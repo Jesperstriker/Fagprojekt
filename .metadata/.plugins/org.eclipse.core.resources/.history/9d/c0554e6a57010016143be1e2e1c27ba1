@@ -1,0 +1,33 @@
+package API_tests;
+
+/*
+ * assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+ */
+
+
+import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.Test;
+
+import API.UserAccount;
+import API_tests.sampleDataSetup;
+
+
+public class testUserAccount extends sampleDataSetup{
+	@Test
+	public void testLogin() throws Exception {
+		UserAccount ussAcc = new UserAccount();
+		
+		String pw = "adminPW";
+		String userName = "admin";
+		String ownerName = "Michael";
+		
+		
+		
+	}
+
+}

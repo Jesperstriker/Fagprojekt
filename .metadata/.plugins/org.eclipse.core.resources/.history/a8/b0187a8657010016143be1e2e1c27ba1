@@ -1,0 +1,16 @@
+package API;
+
+import java.util.*;
+
+
+
+public class UserAccount{
+	private String userName;
+	private String ownerName;
+	private BankAccount Bankaccounts[];
+	private String type;
+	private String password;
+	
+	
+	
+}

@@ -1,0 +1,12 @@
+package API_tests;
+
+import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.Test;
+import API.Controller;
+import API.UserAccount;
+import API_tests.sampleDataSetup;
+
+public class TestUserAccount {
+
+}

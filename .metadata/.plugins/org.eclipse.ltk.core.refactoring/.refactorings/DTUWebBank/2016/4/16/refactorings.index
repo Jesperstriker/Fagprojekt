@@ -1,0 +1,16 @@
+1461137427941	Encapsulate field 'accNumber'
+1461137433566	Encapsulate field 'history'
+1461137437341	Encapsulate field 'currency'
+1461137559178	Encapsulate field 'balance'
+1461137606298	Move compilation unit
+1461137904944	Encapsulate field 'username'
+1461137908685	Encapsulate field 'ownerName'
+1461137912792	Encapsulate field 'bankAccount'
+1461137916059	Encapsulate field 'type'
+1461137921129	Encapsulate field 'password'
+1461138234086	Delete element
+1461138258142	Rename package 'DataObjects'
+1461138494616	Move compilation unit
+1461138564987	Move compilation unit
+1461138613193	Rename package 'api_tests'
+1461138807775	Move compilation unit
