@@ -11,5 +11,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/jespe/Documents/6. Semester/Fagprojekt/DTUWebBank/JDBlib/db2jcc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jespe/Documents/6. Semester/Fagprojekt/DTUWebBank/JDBlib/db2jcc_license_cisuz.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

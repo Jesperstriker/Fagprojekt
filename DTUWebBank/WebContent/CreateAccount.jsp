@@ -27,10 +27,11 @@
 <p>
 <p>
 <form action="Create_account_request.php" method="post">
-  First name:<br>
-  <input type="text" name="firstname" required><br>
-  Last name:<br>
-  <input type="text" name="lastname"><br>
+  
+  <label for="firstname">First name:</label>
+  <input id="firstname" placeholder="Jesper" type="text" name="firstname" required><br>
+  <label for="lastname">Last name:</label>
+  <input id="lastname" type="text" placeholder="Douglas" name="lastname"><br>
   <input type="radio" name="gender" value="male" checked> Male<br>
   <input type="radio" name="gender" value="female"> Female<br>
   <input type="radio" name="gender" value="other"> Other<br>
