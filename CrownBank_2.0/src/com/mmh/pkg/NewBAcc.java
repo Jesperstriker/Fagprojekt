@@ -1,6 +1,8 @@
 package com.mmh.pkg;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -12,23 +14,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/NewBAcc")
+public class NewBAcc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(name="jdbc/exampleDS")
 	private	DataSource ds1;
-    private HttpSession session; 
- 
-	 
-    public Login() {
+	
+    public NewBAcc() {
         super();
     }
-   
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String currency = request.getParameter("currency");
+		BigDecimal intrest = new BigDecimal("3.00");
+		String userID = (String) request.getSession().getAttribute("userID");
+		System.out.println(userID);
+		PrintWriter out = response.getWriter();
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/newBAcc.jsp");
+		Controller control = new Controller();
 		Connection con = null;
 		String conUser = "DTU07";
 		String conPassword = "FAGP2016";
@@ -38,33 +45,23 @@ public class Login extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		String result = control.CreateBankAcc(currency,userID,intrest,con);
+		
+		String[] results = result.split(";");
 		
 		
-//		PrintWriter out = response.getWriter();
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-	
-		Controller control = new Controller();
-		int result = control.Login(login,password,con);
-		
-		ServletContext sc = this.getServletContext();
-		request.setAttribute("user", login);
-		RequestDispatcher rd = sc.getRequestDispatcher("/userHome.jsp");
-		session = request.getSession();
-		session.setAttribute("userID", login);
-		session.setAttribute("isLoggedIn", true);	
-		if(result == 1){
-			request.setAttribute("failedLogin", "false");
+		 if(Integer.parseInt(results[0])!=0){
+		 	out.println("Successfully registered");
+		 	request.setAttribute("success", "true");
+		 	request.setAttribute("accNumber", results[1]);
 		 } else{
-		 	request.setAttribute("failedLogin", "true");
-		 	session.setAttribute("userID", null);
-		 	session.setAttribute("isLoggedIn", false);
-		 	rd = sc.getRequestDispatcher("/login.jsp");
-		 }
+		 	out.println("Unsuccesfully registered, with error: " + results[1]);
+		 	request.setAttribute("success", "false");
+			request.setAttribute("accNumber", null);
+		}
+		 
+		 rd.forward(request, response); 
 		
-		
-		
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,3 +69,4 @@ public class Login extends HttpServlet {
 	}
 
 }
+
