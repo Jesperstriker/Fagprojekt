@@ -13,7 +13,7 @@
 	</div>
 
 	<div id="nav">
-		<%@include file="framework/nav.jsp" %>
+		<%@include file="framework/navHome.jsp" %>
 	</div>
 
 	<!--  The section source code is copied from http://www.cssflow.com/snippets/login-form/demo/html  -->

@@ -36,18 +36,15 @@ public class EditAcc extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(request.getParameter("userID"));
-		String username = request.getParameter("userID");
+		String userID = (String) request.getSession().getAttribute("userID");
+		System.out.println(userID);
 		Controller control = new Controller();
 		userData user = null;
 		try {
-			user = control.getUserInfo(username,con);
+			user = control.getUserInfo(userID,con);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 		String password = user.getPassword();
 		if(request.getParameter(password)!=null){
@@ -67,6 +64,7 @@ public class EditAcc extends HttpServlet {
 		user.setTelephoneNumber(tel);
 		user.setPostnumber(post);
 		
+		System.out.println("Data to be sent to DB2: ");
 		System.out.println(user.getCurrency());
 		System.out.println(user.getPassword());
 		System.out.println(user.getCurrency());

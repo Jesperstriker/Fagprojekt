@@ -19,7 +19,7 @@
 
 <div id="section">
 <h1>
-Welcome!
+User account successfully deleted
 </h1>
 <p> Hello and welcome to our online banking application!<br>
 

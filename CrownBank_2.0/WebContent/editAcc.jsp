@@ -34,14 +34,13 @@
 
 <%if(request.getAttribute("success")==null)  %>
     <br>  	
-      	Please fill in the form below:
+      	Please enter new data in the fields you want to change:
       	<form method="post" action="EditAcc">
-      		<p><input type="hidden" name="userID" value="<%=userID %>"></p>
         	<p><input type="text" name="tel" value="" placeholder="Telephone number"></p>
         	<p><input type="text" name="post" value="" placeholder="Postal number"></p>
        		<p><input type="password" name="password1" value="" placeholder="New password"></p>
        		<p><input type="password" name="password2" value="" placeholder="Repeat new password*"></p>
-       		Your desired default display currency:
+       		Currency:
        		<select name="currency">
     			<option value="USD">USD</option>
     			<option value="DKK">DKK</option>
@@ -50,7 +49,11 @@
  
         <p class="submit"><input type="submit" name="commit" value="Save changes"></p>
       </form>
-
+	
+	
+	<form method="post" action="DeleteAcc">
+        <p class="submit"><input type="submit" name="commit" value="Delete Account"></p>
+      </form>
       
     </div>
 

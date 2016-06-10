@@ -12,23 +12,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/DeleteAcc")
+public class DeleteAcc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(name="jdbc/exampleDS")
-	private	DataSource ds1;
-    private HttpSession session; 
- 
-	 
-    public Login() {
+	private	DataSource ds1;   
+
+    public DeleteAcc() {
         super();
     }
-   
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String userID = (String) request.getSession().getAttribute("userID");
+		
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/deletedAccount.jsp");
+		Controller control = new Controller();
 		Connection con = null;
 		String conUser = "DTU07";
 		String conPassword = "FAGP2016";
@@ -38,33 +40,20 @@ public class Login extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-//		PrintWriter out = response.getWriter();
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-	
-		Controller control = new Controller();
-		int result = control.Login(login,password,con);
-		
-		ServletContext sc = this.getServletContext();
-		request.setAttribute("user", login);
-		RequestDispatcher rd = sc.getRequestDispatcher("/userHome.jsp");
-		session = request.getSession();
-		session.setAttribute("userID", login);
-		session.setAttribute("isLoggedIn", true);	
+		int result = 0;
+		try {
+			result = control.deleteuser(userID,con);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		if(result == 1){
-			request.setAttribute("failedLogin", "false");
-		 } else{
-		 	request.setAttribute("failedLogin", "true");
-		 	session.setAttribute("userID", null);
-		 	session.setAttribute("isLoggedIn", false);
-		 	rd = sc.getRequestDispatcher("/login.jsp");
-		 }
-		
-		
-		
-		rd.forward(request, response);
+			request.setAttribute("success", "true");
+		} else {
+			request.setAttribute("success", "false");
+			rd = sc.getRequestDispatcher("/editAcc.jsp");
+		}
+		rd.forward(request, response); 
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

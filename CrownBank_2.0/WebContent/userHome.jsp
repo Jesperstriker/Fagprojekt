@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+String userID = (String)request.getSession().getAttribute("userID");
+ %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,9 +16,7 @@
 <div id="header">
 <img src="pictures/CrownBankLogo2.png" alt="Logo" width="800" height="140">
 </div>
-<% 
-	System.out.println(session.getAttribute("userID"));
-%>
+
 <div id="nav">
 <%@include file="framework/nav.jsp" %>
 </div>
@@ -23,7 +26,7 @@
 You are logged in!
 </h1>
 
-Welcome <%= request.getParameter("login")%>
+Welcome <%= userID%>
 
 </div>
 

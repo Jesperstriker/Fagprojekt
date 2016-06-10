@@ -78,19 +78,12 @@ public class Controller {
 		return transHist;
 	}
 
-	public static void deleteuser(String userName) throws SQLException, ClassNotFoundException {
-		Connection con = null;
-		try{
-			con=ds1.getConnection(conUser,conPassword);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public int deleteuser(String userName, Connection con) throws SQLException, ClassNotFoundException {
 		CallableStatement cstmt = con.prepareCall("{CALL \"DTUGRP03\".DeleteUser(?,?)}");
 		cstmt.setString(1, userName);
 		cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
 		cstmt.execute();
-		System.out.println(cstmt.getInt(2));
+		return cstmt.getInt(2);
 	}
 	
 	public static void deleteBankAcc(int AccNumber) 
@@ -110,10 +103,12 @@ public class Controller {
 	}
 	
 	public userData getUserInfo(String username, Connection con) throws SQLException {
+		System.out.println("We got this far with username: " + username);
+		String sqlQuery = "SELECT * FROM \"DTUGRP03\".\"UserAccount\" WHERE \"UserName\" = "+username;
 		
-		String sqlQuery = "SELECT * FROM \"DTUGRP03\".\"UserAccount\" WHERE \"UserName\" = "+username; 
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sqlQuery);
+		
 		userData user = new userData();
 
 		user.setUsername(username);
@@ -186,6 +181,7 @@ public class Controller {
 	public String CreateAcc(userData user, Connection con) {
 		CallableStatement cstmt;
 		int result = 0;
+		
 		try {
 			cstmt = con.prepareCall("{CALL \"DTUGRP03\".CreateUserAccount(?,?,?,?,?,?,?,?,?)}");
 			cstmt.setString(1, user.getUsername());
@@ -208,6 +204,28 @@ public class Controller {
 			String status = "An sql exception was thrown by the database";
 			e.printStackTrace();
 			return result + ";" + status;
+		} 
+	}
+
+	public String CreateBankAcc(String currency, String userID, BigDecimal intrest, Connection con) {
+		
+		CallableStatement cstmt;
+		
+		try {
+			cstmt = con.prepareCall("{CALL \"DTUGRP03\".CreateUserAccount(?,?,?,?,?)}");
+			cstmt.setString(1, userID);
+		 	cstmt.setBigDecimal(2, intrest);
+		 	cstmt.setString(3,currency);
+		 	cstmt.registerOutParameter(4, java.sql.Types.INTEGER);
+		 	cstmt.registerOutParameter(5, java.sql.Types.INTEGER);
+		 	cstmt.execute();
+		 	
+		 	return cstmt.getInt(4) + ";" + cstmt.getInt(5);
+		 	
+		} catch (SQLException e) {
+			String status = "An sql exception was thrown by the database";
+			e.printStackTrace();
+			return 0 + ";" + 0;
 		} 
 	}
 }

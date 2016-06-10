@@ -23,7 +23,7 @@
 	if(request.getAttribute("success")=="false"){ %>
 
 <font color = red> Something went wrong while processing you request.. <br> 
-Error: <tr><%= request.getAttribute("status") %></tr> 
+Error: <%= request.getAttribute("status") %>
 </font> 
 <% } else{ %>
 <font color = blue> Your account has succesfully been created! <br> </font> 

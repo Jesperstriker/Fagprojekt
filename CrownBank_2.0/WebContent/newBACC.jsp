@@ -23,16 +23,19 @@
 	if(request.getAttribute("success")=="false"){ %>
 
 <font color = red> Something went wrong while processing you request.. <br> 
-Error: <tr><%= request.getAttribute("status") %></tr> 
+Error: Unable to generate a bank account
 </font> 
 <% } else{ %>
-<font color = blue> Your bank account has succesfully been created! <br> </font> 
+<font color = blue> Your bank account has succesfully been created! <br> 
+With account number: <%= request.getAttribute("accNumber") %>
+</font> 
 <% } }%>
 
 <%if(request.getAttribute("success")==null){  %>
     <br>  	
       	Please select the currency you want the bank account in:
-      	<form method="post" action="CreateAcc">
+      	<form method="post" action="NewBAcc">
+      		<input type=hidden id="thisField" name="inputName">
        		<select name="currency">
     			<option value="USD">USD</option>
     			<option value="DKK">DKK</option>

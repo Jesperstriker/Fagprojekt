@@ -58,4 +58,18 @@ public class userData {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public void printAll(){
+		
+		System.out.println("username: " + username);
+		System.out.println("password: " + password);
+		System.out.println("full name: "+ fullName);
+		System.out.println("postnumber: " + postnumber);
+		System.out.println("telephone: " + telephoneNumber);
+		System.out.println("isAdmin: " + isAdmin);
+		System.out.println("currency: " + currency);
+		System.out.println("type: " + type);
+		
+	}
+	
 }
