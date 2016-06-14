@@ -27,6 +27,9 @@ public class EditAcc extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/editAcc.jsp");
+		
 		Connection con = null;
 		String conUser = "DTU07";
 		String conPassword = "FAGP2016";
@@ -37,7 +40,6 @@ public class EditAcc extends HttpServlet {
 			e.printStackTrace();
 		}
 		String userID = (String) request.getSession().getAttribute("userID");
-		System.out.println(userID);
 		Controller control = new Controller();
 		userData user = null;
 		try {
@@ -47,29 +49,31 @@ public class EditAcc extends HttpServlet {
 		}
 		
 		String password = user.getPassword();
-		if(request.getParameter(password)!=null){
-			password = request.getParameter(password);
+		String reqPassword = (String)request.getParameter("password1");
+		if(!reqPassword.isEmpty() && reqPassword!="" && reqPassword!=null){
+			String reqPassword2 = (String)request.getParameter("password2");
+			if(reqPassword.equals(reqPassword2)){
+				password = reqPassword;
+			}else{
+				request.setAttribute("success", "false");
+				rd.forward(request, response);
+			}
 		}
 		int tel = user.getTelephoneNumber();
-		if(request.getParameter("tel")!=null){
-			tel = Integer.parseInt(request.getParameter("tel"));
-		}
+		String reqTel = (String)request.getParameter("tel");
+		if(!reqTel.isEmpty() && reqTel!= "" && reqTel!=null){
+			tel = Integer.parseInt(reqTel);
+		} 
 		int post = user.getPostnumber();
-		if(request.getParameter("post")!=null){
-			post = Integer.parseInt(request.getParameter("post"));
+		String reqPost = (String)request.getParameter("post");
+		if(!reqPost.isEmpty() && reqPost!= "" && reqPost!=null){
+			post = Integer.parseInt(reqPost);
 		}
 		
 		user.setCurrency(request.getParameter("currency"));
 		user.setPassword(password);
 		user.setTelephoneNumber(tel);
 		user.setPostnumber(post);
-		
-		System.out.println("Data to be sent to DB2: ");
-		System.out.println(user.getCurrency());
-		System.out.println(user.getPassword());
-		System.out.println(user.getCurrency());
-		System.out.println(user.getPostnumber());
-		System.out.println(user.getTelephoneNumber());
 		
 		try {
 			control.editUserAccount(user, con);
@@ -79,9 +83,6 @@ public class EditAcc extends HttpServlet {
 			request.setAttribute("success", "false");
 		}
 		
-		
-		ServletContext sc = this.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/editAcc.jsp");
 		rd.forward(request, response);
 	}
 

@@ -13,7 +13,7 @@
 	</div>
 
 	<div id="nav">
-		<%@include file="framework/nav.jsp" %>
+		<%@include file="framework/navHome.jsp" %>
 	</div>
 
 	<div id="section">
@@ -32,7 +32,7 @@ Error: <%= request.getAttribute("status") %>
 <%if(request.getAttribute("success")==null){  %>
     <br>  	
       	Please fill in the form below:
-      	<form method="post" action="CreateAcc">
+      	<form method="post" action="verifyAdmin.jsp">
         	<p><input type="text" name="name" value="" placeholder="Full name*" required></p>
         	<p><input type="text" name="tel" value="" placeholder="Telephone number*" required></p>
         	<p><input type="text" name="post" value="" placeholder="Postal number*" required></p>

@@ -3,9 +3,12 @@ package com.mmh.pkg;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -16,9 +19,40 @@ public class Controller {
 	private static String conPassword = "FAGP2016";
 
 //	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		// transactionHistory(1111, "DKK");
-//		//editUserAccount("Jesper",123,"123",2800,"USD");
-//		getBankAcc("Jesper");
+//		Connection con = null;
+//		Properties properties = new Properties();
+//		String url = "jdbc:db2://192.86.32.54:5040/"
+//				+ "DALLASB:retrieveMessagesFromServerOnGetMessage=true;"
+//				+ "emulateParameterMetaDataForZCalls=1;";
+//				try {
+//					Class.forName("com.ibm.db2.jcc.DB2Driver");
+//				} catch (ClassNotFoundException e) {
+//					e.printStackTrace();
+//				}
+//		
+//		properties.put("user", "DTU06");
+//		properties.put("password", "FAGP2016");
+//		try {
+//			con = DriverManager.getConnection(url, properties);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		userData user = new userData();
+//		user.setAdmin(true);
+//		user.setCurrency("USD");
+//		user.setFullName("Admin");
+//		user.setPassword("admin");
+//		user.setPostnumber(2800);
+//		user.setTelephoneNumber(40);
+//		user.setType("Administrator");
+//		user.setUsername("admin");
+//		
+//		System.out.println(CreateAcc(user,con));
+//		
+//		
+//		String test = AdminCheck("admin","admin",con);
+//		System.out.println(test);
 //	}
 
 	public static void transaction(BigDecimal amount, 
@@ -103,26 +137,26 @@ public class Controller {
 	}
 	
 	public userData getUserInfo(String username, Connection con) throws SQLException {
-		System.out.println("We got this far with username: " + username);
-		String sqlQuery = "SELECT * FROM \"DTUGRP03\".\"UserAccount\" WHERE \"UserName\" = "+username;
+		
+		String sqlQuery = "SELECT * FROM \"DTUGRP03\".\"UserAccount\" WHERE \"UserName\" = " + "'"+username+"'";
 		
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(sqlQuery);
-		
 		userData user = new userData();
 
 		user.setUsername(username);
 		
 		while (rs.next()){
-			if(rs.getString(5)=="Client"){
+			if(rs.getString(5).equals("Client")){
 				user.setAdmin(false);
+				user.setType("Client");
 			}else{
 				user.setAdmin(true);
+				user.setType("Administrator");
 			}
 		user.setFullName(rs.getString(2));
 		user.setTelephoneNumber(rs.getInt(3));
 		user.setPassword(rs.getString(4));
-		 
 		user.setPostnumber(rs.getInt(6));
 		user.setCurrency(rs.getString(7));
 		}
@@ -212,10 +246,10 @@ public class Controller {
 		CallableStatement cstmt;
 		
 		try {
-			cstmt = con.prepareCall("{CALL \"DTUGRP03\".CreateUserAccount(?,?,?,?,?)}");
+			cstmt = con.prepareCall("{CALL \"DTUGRP03\".CreateBankAccount(?,?,?,?,?)}");
 			cstmt.setString(1, userID);
 		 	cstmt.setBigDecimal(2, intrest);
-		 	cstmt.setString(3,currency);
+		 	cstmt.setString(3, currency);
 		 	cstmt.registerOutParameter(4, java.sql.Types.INTEGER);
 		 	cstmt.registerOutParameter(5, java.sql.Types.INTEGER);
 		 	cstmt.execute();
@@ -227,6 +261,14 @@ public class Controller {
 			e.printStackTrace();
 			return 0 + ";" + 0;
 		} 
+	}
+
+	public String AdminCheck(String login, String password, Connection con) throws SQLException {
+		userData data = getUserInfo(login, con);
+		if(data.isAdmin() && data.getPassword().equals(password)){
+			return "true";
+		}
+		return "false";
 	}
 }
 

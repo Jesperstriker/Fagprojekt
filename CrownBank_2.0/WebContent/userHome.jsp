@@ -4,6 +4,7 @@
 
 <%
 String userID = (String)request.getSession().getAttribute("userID");
+String isAdmin = (String)request.getSession().getAttribute("isAdmin");
  %>
 
 <html>
@@ -17,9 +18,15 @@ String userID = (String)request.getSession().getAttribute("userID");
 <img src="pictures/CrownBankLogo2.png" alt="Logo" width="800" height="140">
 </div>
 
+<%if(isAdmin.equals("true")){ %>
+<div id="nav">
+<%@include file="framework/navAdmin.jsp" %>
+</div>
+<% } else{ %>
 <div id="nav">
 <%@include file="framework/nav.jsp" %>
 </div>
+<% } %>
 
 <div id="section">
 <h1>

@@ -52,18 +52,26 @@ public class Login extends HttpServlet {
 		RequestDispatcher rd = sc.getRequestDispatcher("/userHome.jsp");
 		session = request.getSession();
 		session.setAttribute("userID", login);
-		session.setAttribute("isLoggedIn", true);	
+		session.setAttribute("isLoggedIn", true);
+		String isAdmin = "false";
 		if(result == 1){
+			try {
+				isAdmin = control.AdminCheck(login, password, con);
+			} catch (SQLException e) {
+				System.out.println("SQL exception thrown when trying to determine if the user is admin");
+				e.printStackTrace();
+			}
 			request.setAttribute("failedLogin", "false");
 		 } else{
 		 	request.setAttribute("failedLogin", "true");
 		 	session.setAttribute("userID", null);
 		 	session.setAttribute("isLoggedIn", false);
+		 	
 		 	rd = sc.getRequestDispatcher("/login.jsp");
 		 }
 		
 		
-		
+		session.setAttribute("isAdmin", isAdmin);
 		rd.forward(request, response);
 	}
 
